@@ -47,8 +47,8 @@ function go(tmp) {
         subject: 'HURRYYYY!!! Price dropped',
         text: `The price of your product ${url} has dropped below ${myPrice}... Grab the deal before the sale ends!`
     };
-    sendIt(transporter, mailOptions);
-    //const task = cron.schedule('*/10 * * * * *', () => compare(transporter, mailOptions, myPrice, url, task));
+    //sendIt(transporter, mailOptions);
+    const task = cron.schedule('*/10 * * * * *', () => compare(transporter, mailOptions, myPrice, url, task));
 }
 
 function sendIt(transporter, mailOptions) {
