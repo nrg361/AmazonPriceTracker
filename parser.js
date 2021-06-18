@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 4000);
 
 app.use(express.static(__dirname));
 
@@ -21,6 +21,7 @@ app.get('/', function (req, resp) {
 app.post('/', function (req, resp) {
     var tmp = JSON.parse(JSON.stringify(req.body));
     go(tmp);
+    resp.send("Email will be sent!");
 });
 
 
