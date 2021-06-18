@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.listen(process.env.PORT || 4000);
+app.listen(process.env.PORT || 3000);
 
 app.use(express.static(__dirname));
 
@@ -34,7 +34,7 @@ function go(tmp) {
 
 
     const transporter = nodemailer.createTransport({
-        service: 'gmail',
+        service: 'hotmail',
         auth: {
             user: email,
             pass: pswrd
@@ -48,7 +48,7 @@ function go(tmp) {
         text: `The price of your product ${url} has dropped below ${myPrice}... Grab the deal before the sale ends!`
     };
 
-    const task = cron.schedule('*/10 * * * * *', () => compare(transporter, mailOptions, myPrice,url,task));
+    const task = cron.schedule('*/10 * * * * *', () => compare(transporter, mailOptions, myPrice, url, task));
 }
 
 function sendIt(transporter, mailOptions) {
@@ -61,7 +61,7 @@ function sendIt(transporter, mailOptions) {
     });
 }
 
-async function compare(transporter, mailOptions, myPrice,url,task) {
+async function compare(transporter, mailOptions, myPrice, url, task) {
     try {
         const priceStr = await nightmare.goto(url)
             .wait("#priceblock_ourprice")
